@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const format = require('js-beautify').html;
 const { default: render } = require('../server/render');
-const outputPath = path.join(__dirname, '../output/index.html');
+const outputPath = path.join(__dirname, '../build/index.html');
 const { html } = render();
 
 fs.writeFileSync(outputPath, format(html));

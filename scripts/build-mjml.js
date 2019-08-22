@@ -7,7 +7,7 @@ const fs = require('fs');
 const path = require('path');
 const format = require('js-beautify').html;
 const { default: render } = require('../server/render');
-const outputPath = path.join(__dirname, '../output/index.mjml');
+const outputPath = path.join(__dirname, '../build/index.mjml');
 const { mjml } = render();
 
 fs.writeFileSync(outputPath, format(mjml));
