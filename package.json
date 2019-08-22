@@ -5,9 +5,8 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "nodemon  --watch src/ --watch server/ server/index.js",
-    "build-html": "node scripts/build-html",
-    "build-mjml": "node scripts/build-mjml",
+    "start": "babel-watch ./server/index.js",
+    "build": "node scripts/build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,7 +32,13 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "babel-watch": "^7.0.0",
+    "fs-extra": "^8.1.0",
     "js-beautify": "^1.10.2",
-    "reload": "^3.0.1"
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-middleware": "^3.7.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }

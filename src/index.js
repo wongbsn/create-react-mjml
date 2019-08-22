@@ -10,7 +10,7 @@ const MJML = () => (
     <mj-body>
       <mj-section background-color="#f3f3f3">
         <mj-column>
-          <mj-image width="300px" src="https://i.imgur.com/hj7Qhbq.jpg" />
+          <mj-image width="300px" src="./images/example.jpeg" />
         </mj-column>
         <mj-column>
           <mj-text
