@@ -1,17 +1,20 @@
 import React from 'react';
-import Article from '~/sections/Article';
+import { hydrate } from 'react-dom';
+import MJML from './Mjml';
 
-const MJML = () => (
-  <mjml>
-    <mj-head>
-      <mj-attributes>
-        <mj-all font-family="Arial, Helvetica" font-size="16px" />
-      </mj-attributes>
-    </mj-head>
-    <mj-body>
-      <Article />
-    </mj-body>
-  </mjml>
-);
+// console.log('HERE');
 
-export default MJML;
+// const renderApp = () =>
+//   console.log('=========>') || hydrate(<MJML />, document.getElementById('root'));
+
+// renderApp();
+
+if (module.hot) {
+  module.hot.accept('./Mjml', () => {
+    console.log('HERE')
+  });
+}
+
+if(global.window) {
+  // global.window.location.reload();
+}

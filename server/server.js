@@ -16,19 +16,21 @@ const server = http.createServer(app);
 const router = express.Router();
 
 // Configure webpack with HMR
-config.entry.app.unshift('webpack-hot-middleware/client?reload=true&timeout=1000');
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 const compiler = webpack(config);
 
 // Use webpack-dev-server with express
 app.use(webpackDevMiddleware(compiler, {
+    serverSideRender: true,
     publicPath: config.output.publicPath
 }));
 app.use(webpackHotMiddleware(compiler));
 app.use(router);
 
 router.use('^/$', (req, res, next) => {
+  console.log('HERE');
+
   fs.readFile(
     path.resolve('./public/index.html'),
     'utf8',
@@ -44,6 +46,8 @@ router.use('^/$', (req, res, next) => {
         if (errors.length) {
           throw new Error(`Mjml parsing errors: ${JSON.stringify(errors)}`);
         }
+
+        console.log(html)
 
         return res.send(
           data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)

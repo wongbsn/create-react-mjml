@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '~/components/Button';
 
 const Article = () => (
-  <mj-section background-color="#f3f3f3">
+  <mj-section background-color="red">
     <mj-column>
       <mj-image width="300px" src="./images/example.jpeg" />
     </mj-column>
