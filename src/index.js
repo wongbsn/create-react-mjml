@@ -1,17 +1,18 @@
 import React from 'react';
-import Article from '~/sections/Article';
+import { renderToString } from 'react-dom/server';
+import axios from 'axios';
 
-const MJML = () => (
-  <mjml>
-    <mj-head>
-      <mj-attributes>
-        <mj-all font-family="Arial, Helvetica" font-size="16px" />
-      </mj-attributes>
-    </mj-head>
-    <mj-body>
-      <Article />
-    </mj-body>
-  </mjml>
-);
+import MJML from './Mjml';
 
-export default MJML;
+const renderApp = () =>
+  axios.post('/mjml', { mjml: renderToString(<MJML />) }).then(res => {
+    document.open();
+    document.write(res.data.html);
+    document.close();
+  });
+
+renderApp();
+
+if (module.hot) {
+  module.hot.accept();
+}

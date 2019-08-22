@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import mjml2html from 'mjml';
 
-import Mjml from '../src';
+import Mjml from '../src/Mjml';
 
 function render() {
   const mjml = renderToString(<Mjml />)

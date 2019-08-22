@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const babelConfig = require('./.babelrc');
 
 module.exports = {
@@ -9,7 +10,7 @@ module.exports = {
     host: `localhost`
   },
   entry: {
-    app: ['./src/index.js']
+    app: ['webpack-hot-middleware/client?reload=true&timeout=1000', './src/index.js']
   },
   output: {
     path: path.join(__dirname, 'dist'),
