@@ -1,4 +1,5 @@
 const path = require('path');
+const babelConfig = require('./.babelrc');
 
 module.exports = {
   mode: 'development',
@@ -18,13 +19,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader'
-        }
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelConfig
+          }
+        ]
       }
     ]
   },
-  plugins: []
+  plugins: [],
+  resolve: {
+    alias: {
+      '~': path.resolve(__dirname, 'src/')
+    }
+  }
 };
