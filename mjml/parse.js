@@ -1,11 +1,7 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
 import mjml2html from 'mjml';
 
-import Mjml from '../src/Mjml';
-
-function render() {
-  const mjml = renderToString(<Mjml />)
+function parse(reactMjml) {
+  const mjml = reactMjml
     // TODO: Use a better replace method - look only between <mj-raw></mj-raw>
     .replace(/&gt;/g, '>')
     .replace(/&lt;/g, '<')
@@ -17,4 +13,4 @@ function render() {
   return { mjml, html: html.trim(), errors };
 }
 
-export default render;
+export default parse;

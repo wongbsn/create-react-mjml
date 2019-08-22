@@ -6,9 +6,10 @@ require('@babel/register')({
 const fs = require('fs-extra');
 const path = require('path');
 const format = require('js-beautify').html;
-const { default: render } = require('../server/render');
+const { render } = require('../mjml');
 const outputDir = path.join(__dirname, '../build');
-const { html, mjml } = render();
+
+const { mjml, html } = render();
 
 fs.writeFileSync(path.join(outputDir, 'index.mjml'), format(mjml));
 fs.writeFileSync(path.join(outputDir, 'index.html'), format(html));

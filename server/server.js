@@ -7,11 +7,9 @@ import http from 'http';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import mjml2html from 'mjml';
 
 import config from '../webpack.config';
-
-import render from './render';
+import { parse, render } from '../mjml';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -34,27 +32,29 @@ app.use(express.json());
 app.use(router);
 
 // Transforms mjml data and returns html
-router.post('/mjml', (req, res, next) => res.send(mjml2html(req.body.mjml)));
+router.post('/mjml', (req, res, next) => res.send(parse(req.body.mjml)));
 
 router.use('^/$', (req, res, next) => {
-  fs.readFile(path.resolve('./public/index.html'), 'utf8', (serverError, data) => {
-    if (serverError) {
-      console.error(err);
-      return res.status(500).send('Internal Server Error');
-    }
-
-    try {
-      const { html, errors } = render();
-
-      if (errors.length) {
-        throw new Error(`Mjml parsing errors: ${JSON.stringify(errors)}`);
+  fs.readFile(
+    path.resolve('./public/index.html'),
+    'utf8',
+    (serverError, data) => {
+      if (serverError) {
+        console.error(err);
+        return res.status(500).send('Internal Server Error');
       }
 
-      return res.send(data.replace('<div id="root"></div>', `<div id="root">${html}</div>`));
-    } catch (error) {
-      return res.send(error.stack);
+      try {
+        const { html } = render();
+
+        return res.send(
+          data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
+        );
+      } catch (error) {
+        return res.send(error.stack);
+      }
     }
-  });
+  );
 });
 
 router.use(express.static(path.resolve(__dirname, '..', 'public')));
