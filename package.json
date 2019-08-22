@@ -1,0 +1,40 @@
+{
+  "name": "mjml-scaffold",
+  "version": "1.0.0",
+  "description": "A scaffold for creating email templates using mjml",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon  --watch src/ --watch server/ server/index.js",
+    "build-html": "node scripts/build-html",
+    "build-mjml": "node scripts/build-mjml",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wongbsn/mjml-scaffold.git"
+  },
+  "author": "Benson Wong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wongbsn/mjml-scaffold/issues"
+  },
+  "homepage": "https://github.com/wongbsn/mjml-scaffold#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mjml": "^4.4.1",
+    "nodemon": "^1.19.1",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "js-beautify": "^1.10.2",
+    "react-hot-loader": "^4.12.11",
+    "reload": "^3.0.1"
+  }
+}
