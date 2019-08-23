@@ -1,6 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const babelConfig = require('./.babelrc');
 
 module.exports = {
   mode: 'development',
@@ -10,7 +9,10 @@ module.exports = {
     host: `localhost`
   },
   entry: {
-    app: ['webpack-hot-middleware/client?reload=true&timeout=1000', './src/index.js']
+    app: [
+      'webpack-hot-middleware/client?reload=true&timeout=1000',
+      './src/index.js'
+    ]
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -22,12 +24,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'babel-loader',
-            options: babelConfig
-          }
-        ]
+        loader: 'babel-loader'
       }
     ]
   },

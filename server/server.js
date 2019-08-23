@@ -23,7 +23,7 @@ const compiler = webpack(config);
 
 app.use(
   webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath
+    publicPath: config.output.publicPath,
   })
 );
 app.use(webpackHotMiddleware(compiler));
