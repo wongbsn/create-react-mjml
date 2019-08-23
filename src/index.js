@@ -4,14 +4,14 @@ import axios from 'axios';
 
 import MJML from './Mjml';
 
-const renderApp = () =>
+const render = () =>
   axios.post('/mjml', { mjml: renderToString(<MJML />) }).then(res => {
     document.open();
     document.write(res.data.html);
     document.close();
   });
 
-renderApp();
+render();
 
 if (module.hot) {
   module.hot.accept();
