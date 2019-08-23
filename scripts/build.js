@@ -14,7 +14,7 @@ const { mjml, html } = render();
 Promise.all([
   fs.outputFile(path.join(outputDir, 'index.mjml'), format(mjml)),
   fs.outputFile(path.join(outputDir, 'index.html'), format(html)),
-  fs.copy('./public/images', './build/images')
+  fs.copy('./public/images', path.join(outputDir, 'images'))
 ]).then(() => {
   console.log(`Build successfully written to ${outputDir}`);
 });
