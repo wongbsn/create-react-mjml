@@ -11,7 +11,10 @@ const outputDir = path.join(__dirname, '../build');
 
 const { mjml, html } = render();
 
-fs.writeFileSync(path.join(outputDir, 'index.mjml'), format(mjml));
-fs.writeFileSync(path.join(outputDir, 'index.html'), format(html));
-fs.copySync('./public/images', './build/images');
-console.log(`Build successfully written to ${outputDir}`);
+Promise.all([
+  fs.outputFile(path.join(outputDir, 'index.mjml'), format(mjml)),
+  fs.outputFile(path.join(outputDir, 'index.html'), format(html)),
+  fs.copy('./public/images', './build/images')
+]).then(() => {
+  console.log(`Build successfully written to ${outputDir}`);
+});
