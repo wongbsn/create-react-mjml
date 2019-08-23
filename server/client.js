@@ -2,7 +2,7 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import axios from 'axios';
 
-import MJML from './Mjml';
+import MJML from '../src/Mjml';
 
 const render = () =>
   axios.post('/mjml', { mjml: renderToString(<MJML />) }).then(res => {

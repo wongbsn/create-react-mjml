@@ -11,7 +11,7 @@ module.exports = {
   entry: {
     app: [
       'webpack-hot-middleware/client?reload=true&timeout=1000',
-      './src/index.js'
+      './server/client.js'
     ]
   },
   output: {
