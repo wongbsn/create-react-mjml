@@ -8,13 +8,11 @@ import Card from '~/components/Card';
 import exampleImage from '@assets/example.jpeg';
 
 const MSOutlookGTE9 = ({ children }) => (
-  <mj-section>
-    <mj-column>
-      <mj-raw>{`<!--[if gte mso 9]>`}</mj-raw>
-        {children}
-      <mj-raw>{`<![endif]-->`}</mj-raw>
-    </mj-column>
-  </mj-section>
+  <>
+    <mj-raw>{`<!--[if gte mso 9]>`}</mj-raw>
+      {children}
+    <mj-raw>{`<![endif]-->`}</mj-raw>
+  </>
 );
 
 const Mjml = () => (
@@ -38,7 +36,9 @@ const Mjml = () => (
         <mj-image src={exampleImage} width="450px" alt="example" />
       </Card>
       <MSOutlookGTE9>
-        <mj-text>Conditionally seen.</mj-text>
+        <Card>
+          <mj-text>Conditionally seen.</mj-text>
+        </Card>
       </MSOutlookGTE9>
     </mj-body>
   </mjml>
