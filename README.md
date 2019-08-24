@@ -2,6 +2,29 @@
 
 Develop MJML code using React.
 
+```js
+import React from 'react';
+import Card from '~/components/Card';
+import exampleImage from '@assets/example.jpeg';
+
+const Mjml = () => (
+  <mjml>
+    <mj-head>
+      <mj-attributes>
+        <mj-all font-family="Arial, Helvetica" font-size="20px" />
+      </mj-attributes>
+    </mj-head>
+    <mj-body>
+      <Card>
+        <mj-image src={exampleImage} width="450px" alt="example" />
+      </Card>
+    </mj-body>
+  </mjml>
+);
+
+export default Mjml;
+```
+
 ## Install
 
 Run `npm install`.
@@ -12,7 +35,7 @@ npm install
 
 ## Development
 
-Run `npm run start` and start developing in `/src`. Place all assets in `/assets` - do not change the name of this directory. See [Asset Directory Name](#asset-directory-name) to modify the output of paths for assets.
+Run `npm run start` and start developing in `/src`. Place all assets in `/assets` - do not change the name of this directory. See [Build Asset Paths](#build-asset-paths) to modify the build paths for assets.
 
 ```bash
 npm start
@@ -26,32 +49,29 @@ To get the resulting output for your code, run `npm run build`. This will create
 npm run build
 ```
 
-### Asset Directory Name
+### Build asset paths
+
+Your can changes the build asset path by passing in additional options.
+
+#### Asset Directory
 
 If you prefer your assets in a directory, pass in a directory name with `--assetDir`. This will change all paths and copy your assets in the specified directory name.
 
 ```bash
-yarn build --assetDir images
+npm run build -- --assetDir images
 ```
 ```html
-<!-- Changed directory -->
+<!-- Prefixed with directory name -->
 <mj-image src="images/example.jpeg" />
 ```
+#### Asset URI
 
-If your assets are external, you can pass in a `url` to `--assetUri` to prefix all assets with this `url`.
-
-```bash
-yarn build --assetUri https://cdn.com
-```
-```html
-<!-- Changed directory -->
-<mj-image src="https://cdn.com/example.jpeg" />
-```
+If your assets are external, you can pass in a `uri` to `--assetUri` to prefix all assets with this `url`.
 
 ```bash
-yarn build --assetPath images --assetUri https://cdn.com
+npm run build -- --assetUri https://cdn.com
 ```
 ```html
-<!-- Changed directory -->
+<!-- Assets are prefixed with URI -->
 <mj-image src="https://cdn.com/example.jpeg" />
 ```
