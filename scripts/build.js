@@ -6,7 +6,9 @@ const babelConfig = require('../.babelrc');
 const outputDir = path.join(__dirname, '../build');
 const CWD = process.cwd();
 const assetDir = argv.assetDir ? path.join(argv.assetDir, '/') : '';
-const assetUri = argv.assetUri ? argv.assetUri.replace(/\/$/ ,'') : '';
+const assetUri = argv.assetUri
+  ? argv.assetUri.replace(/\/?$/, assetDir ? '/' : '')
+  : '';
 
 require('@babel/register')({
   ...babelConfig,
@@ -15,8 +17,8 @@ require('@babel/register')({
     [
       'transform-assets-import-to-string',
       {
-        baseDir: assetDir && assetUri ? assetDir : CWD,
-        baseUri: assetUri ? assetUri : undefined
+        baseDir: assetDir && assetUri ? assetDir : assetDir ? CWD : assetDir,
+        baseUri: assetUri
       }
     ]
   ]
@@ -27,11 +29,7 @@ const { mjml, html } = render();
 
 const replaceImportPath = string => {
   const replaceRegExp = new RegExp(path.join(CWD, 'assets/'), 'g');
-  const dir = assetUri
-    ? '/' 
-    : assetDir
-      ? assetDir
-      : '';
+  const dir = assetUri ? '/' : assetDir ? assetDir : '';
 
   return string.replace(replaceRegExp, dir);
 };
