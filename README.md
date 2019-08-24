@@ -7,14 +7,6 @@ import React from 'react';
 import Card from '~/components/Card';
 import exampleImage from '@assets/example.jpeg';
 
-const MSOutlookGTE9 = ({ children }) => (
-  <>
-    <mj-raw>{`<!--[if gte mso 9]>`}</mj-raw>
-      {children}
-    <mj-raw>{`<![endif]-->`}</mj-raw>
-  </>
-);
-
 const Mjml = () => (
   <mjml>
     <mj-head>
@@ -35,11 +27,6 @@ const Mjml = () => (
       <Card>
         <mj-image src={exampleImage} width="450px" alt="example" />
       </Card>
-      <MSOutlookGTE9>
-        <Card>
-          <mj-text>Conditionally seen.</mj-text>
-        </Card>
-      </MSOutlookGTE9>
     </mj-body>
   </mjml>
 );
