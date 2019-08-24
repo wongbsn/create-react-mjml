@@ -1,7 +1,7 @@
 import React from 'react';
 import Article from '~/sections/Article';
 
-const MJML = () => (
+const Mjml = () => (
   <mjml>
     <mj-head>
       <mj-attributes>
@@ -14,4 +14,4 @@ const MJML = () => (
   </mjml>
 );
 
-export default MJML;
+export default Mjml;

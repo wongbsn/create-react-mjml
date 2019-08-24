@@ -9,7 +9,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
 import config from '../webpack.config';
-import { parse, render } from '../mjml';
+import parse from '../mjml/parse';
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -20,10 +20,19 @@ const router = express.Router();
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 const compiler = webpack(config);
-
+`<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mjml Template</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="app.js"></script>
+  </body>
+</html>`;
 app.use(
   webpackDevMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: config.output.publicPath
   })
 );
 app.use(webpackHotMiddleware(compiler));
@@ -34,28 +43,19 @@ app.use(router);
 // Transforms mjml data and returns html
 router.post('/mjml', (req, res, next) => res.send(parse(req.body.mjml)));
 
-router.use('^/$', (req, res, next) => {
-  fs.readFile(
-    path.resolve('./public/index.html'),
-    'utf8',
-    (serverError, data) => {
-      if (serverError) {
-        console.error(err);
-        return res.status(500).send('Internal Server Error');
-      }
-
-      try {
-        const { html } = render();
-
-        return res.send(
-          data.replace('<div id="root"></div>', `<div id="root">${html}</div>`)
-        );
-      } catch (error) {
-        return res.send(error.stack);
-      }
-    }
-  );
-});
+router.use('^/$', (req, res, next) =>
+  res.send(
+    `<!DOCTYPE html>
+      <html>
+        <head>
+          <title>Create React MJML</title>
+        </head>
+        <body>
+          <script src="app.js"></script>
+        </body>
+      </html>`
+  )
+);
 
 router.use(express.static(path.resolve(__dirname, '..', 'public')));
 

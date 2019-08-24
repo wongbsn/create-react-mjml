@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const babelConfig = require('./.babelrc');
 
 module.exports = {
   mode: 'development',
@@ -17,21 +17,34 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: `[name].js`
+    filename: '[name].js'
   },
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: babelConfig
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [],
   resolve: {
     alias: {
-      '~': path.resolve(__dirname, 'src/')
+      '~': path.resolve(__dirname, 'src/'),
+      '@assets': path.resolve(__dirname, 'assets/')
     }
   }
 };

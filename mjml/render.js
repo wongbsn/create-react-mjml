@@ -1,8 +1,8 @@
-import React from 'react';
-import { renderToString } from 'react-dom/server';
-import parse from './parse';
+const React = require('react');
+const { renderToString } = require('react-dom/server');
+const parse = require('./parse');
 
-import Mjml from '../src/Mjml';
+const { default: Mjml } = require('../src/Mjml');
 
 function render() {
   const reactMjml = renderToString(<Mjml />);
@@ -15,4 +15,4 @@ function render() {
   return { html, mjml };
 }
 
-export default render;
+module.exports = render;

@@ -1,4 +1,4 @@
-import mjml2html from 'mjml';
+const mjml2html = require('mjml');
 
 // Children under these tags will have their html entites
 // replaced with their corresponding character
@@ -11,7 +11,8 @@ const characterEntityMap = {
   '&amp;': `&`
 };
 const entities = Object.keys(characterEntityMap);
-const getTagRegExp = tag => new RegExp(`<${tag}(?:.*?)>(\\s|.)*?<\\/${tag}>`, 'g');
+const getTagRegExp = tag =>
+  new RegExp(`<${tag}(?:.*?)>(\\s|.)*?<\\/${tag}>`, 'g');
 const getEntityRegExp = entity => new RegExp(entity, 'g');
 
 function parse(reactMjml, options) {
@@ -25,10 +26,7 @@ function parse(reactMjml, options) {
       matches.forEach(match => {
         const replacementString = entities.reduce(
           (result, entity) =>
-            result.replace(
-              getEntityRegExp(entity),
-              characterEntityMap[entity]
-            ),
+            result.replace(getEntityRegExp(entity), characterEntityMap[entity]),
           match
         );
 
@@ -42,4 +40,4 @@ function parse(reactMjml, options) {
   return { mjml, html: html.trim(), errors };
 }
 
-export default parse;
+module.exports = parse;
