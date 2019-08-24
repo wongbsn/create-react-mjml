@@ -7,17 +7,39 @@ import React from 'react';
 import Card from '~/components/Card';
 import exampleImage from '@assets/example.jpeg';
 
+const MSOutlookGTE9 = ({ children }) => (
+  <mj-section>
+    <mj-column>
+      <mj-raw>{`<!--[if gte mso 9]>`}</mj-raw>
+        {children}
+      <mj-raw>{`<![endif]-->`}</mj-raw>
+    </mj-column>
+  </mj-section>
+);
+
 const Mjml = () => (
   <mjml>
     <mj-head>
       <mj-attributes>
         <mj-all font-family="Arial, Helvetica" font-size="20px" />
       </mj-attributes>
+      <mj-style>
+      {`
+        @media only screen and (max-width: 449px) {
+          .card {
+            display: none;
+          }
+        }
+      `}
+      </mj-style>
     </mj-head>
     <mj-body>
       <Card>
         <mj-image src={exampleImage} width="450px" alt="example" />
       </Card>
+      <MSOutlookGTE9>
+        <mj-text>Conditionally seen.</mj-text>
+      </MSOutlookGTE9>
     </mj-body>
   </mjml>
 );
