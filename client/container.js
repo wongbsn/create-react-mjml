@@ -55,7 +55,7 @@ const copyButtonStyle = {
 };
 
 const TOAST_OPTIONS = {
-  autoClose: 1200,
+  autoClose: 1500,
   position: toast.POSITION.TOP_LEFT,
   draggable: false
 };
@@ -76,7 +76,7 @@ const Container = ({ mjml, html, errors }) => {
       toast.error('Copy failed due to errors!', TOAST_OPTIONS);
     } else {
       copyToClipboard(mjmlInputRef.current);
-      toast.success('MJML successfully copied!', TOAST_OPTIONS);
+      toast.info('MJML successfully copied!', TOAST_OPTIONS);
     }
   };
 
@@ -85,7 +85,7 @@ const Container = ({ mjml, html, errors }) => {
       toast.error('Copy failed due to errors!', TOAST_OPTIONS);
     } else {
       copyToClipboard(htmlInputRef.current);
-      toast.success('HTML successfully copied!', TOAST_OPTIONS);
+      toast.info('HTML successfully copied!', TOAST_OPTIONS);
     }
   };
 
@@ -133,7 +133,6 @@ const Container = ({ mjml, html, errors }) => {
       </div>
       <iframe
         style={{
-          backgroundColor: '#FFFFFF',
           border: 'none',
           width: '100%',
           flex: 1
