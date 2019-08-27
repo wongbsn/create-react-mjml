@@ -1,7 +1,7 @@
 import renderContainer from './container';
 import renderApp from './app';
 
-if(window.location.pathname === '/') {
+if (window.location.pathname === '/') {
   renderContainer();
 } else {
   renderApp();

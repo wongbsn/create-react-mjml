@@ -13,6 +13,10 @@ const VIEWS = {
   HTML: 'html'
 };
 
+const ButtonContainer = props => (
+  <div style={{ display: 'inline-block', marginTop: 10 }} {...props} />
+);
+
 const Button = ({ style, ...rest }) => (
   <button
     style={{
@@ -50,8 +54,6 @@ const copyButtonStyle = {
   backgroundColor: '#D74B3E'
 };
 
-const navHeight = 53;
-
 const TOAST_OPTIONS = {
   autoClose: 1200,
   position: toast.POSITION.TOP_LEFT,
@@ -88,54 +90,58 @@ const Container = ({ mjml, html, errors }) => {
   };
 
   return (
-    <>
+    <main style={{ display: 'flex', height: '100%', flexDirection: 'column' }}>
       <HiddenInput ref={mjmlInputRef} value={mjml} />
       <HiddenInput ref={htmlInputRef} value={html} />
       <ToastContainer />
       <div
         style={{
-          height: navHeight,
-          padding: '10px 0',
+          padding: '0 10px 10px',
           boxSizing: 'border-box',
           textAlign: 'center',
           backgroundColor: '#131418'
         }}
       >
-        <Button
-          style={view === VIEWS.APP ? selectedStyle : null}
-          onClick={() => setView(VIEWS.APP)}
-        >
-          Render
+        <ButtonContainer>
+          <Button
+            style={view === VIEWS.APP ? selectedStyle : null}
+            onClick={() => setView(VIEWS.APP)}
+          >
+            Render
         </Button>
-        <Button
-          style={view === VIEWS.MJML ? selectedStyle : null}
-          onClick={() => setView(VIEWS.MJML)}
-        >
-          MJML
+          <Button
+            style={view === VIEWS.MJML ? selectedStyle : null}
+            onClick={() => setView(VIEWS.MJML)}
+          >
+            MJML
         </Button>
-        <Button
-          style={view === VIEWS.HTML ? selectedStyle : null}
-          onClick={() => setView(VIEWS.HTML)}
-        >
-          HTML
+          <Button
+            style={view === VIEWS.HTML ? selectedStyle : null}
+            onClick={() => setView(VIEWS.HTML)}
+          >
+            HTML
         </Button>
-        <Button style={copyButtonStyle} onClick={copyMJML}>
-          Copy MJML
-        </Button>
-        <Button style={copyButtonStyle} onClick={copyHTML}>
-          Copy HTML
-        </Button>
+        </ButtonContainer>
+        <ButtonContainer>
+          <Button style={copyButtonStyle} onClick={copyMJML}>
+            Copy MJML
+          </Button>
+          <Button style={copyButtonStyle} onClick={copyHTML}>
+            Copy HTML
+          </Button>
+        </ButtonContainer>
       </div>
       <iframe
         style={{
+          backgroundColor: '#FFFFFF',
           border: 'none',
           width: '100%',
-          minHeight: `calc(100vh - ${navHeight}px)`
+          flex: 1
         }}
         width="100%"
         src={`/${view}`}
       ></iframe>
-    </>
+    </main>
   );
 };
 

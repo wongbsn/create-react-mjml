@@ -22,16 +22,7 @@ const router = express.Router();
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 const compiler = webpack(config);
-`<!DOCTYPE html>
-<html>
-  <head>
-    <title>Mjml Template</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="app.js"></script>
-  </body>
-</html>`;
+
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: config.output.publicPath
@@ -94,6 +85,7 @@ router.use('^/*$', (req, res, next) =>
       <html>
         <head>
           <title>Create React MJML</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
           <style>
             html, body, #root {
               width: 100%;
@@ -107,6 +99,10 @@ router.use('^/*$', (req, res, next) =>
 
             .app {
               overflow: scroll;
+            }
+
+            .markup {
+              background-color: #141414;
             }
 
             pre {

@@ -25,17 +25,17 @@ const renderApp = () =>
       const { pathname } = window.location;
       const root = document.getElementById('root');
 
-      if(root) {
+      if (root) {
         root.classList.add('app');
       }
-      
+
       if (errors.length) {
         directRender(`<h1 style="color:black;font-size:20px;margin:30px 0 10px;">Mjml Parsing Errors:</h1>
             <pre style="display:inline-block;border: 3px solid black;color:red;font-size:16px;padding:20px 25px;background:#efefef;">${JSON.stringify(
-              errors,
-              null,
-              2
-            )}</pre>`);
+            errors,
+            null,
+            2
+          )}</pre>`);
       } else {
         switch (pathname) {
           case '/mjml':
