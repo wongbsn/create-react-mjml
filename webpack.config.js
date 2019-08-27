@@ -11,7 +11,7 @@ module.exports = {
   entry: {
     app: [
       'webpack-hot-middleware/client?reload=true&timeout=1000',
-      './server/client.js'
+      './client/index.js'
     ]
   },
   output: {
@@ -26,6 +26,10 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: babelConfig
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.(png|jpe?g|gif)$/i,

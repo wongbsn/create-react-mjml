@@ -8,7 +8,7 @@ const getTagRegExp = tag =>
   new RegExp(`<${tag}(?:.*?)>(\\s|.)*?<\\/${tag}>`, 'g');
 
 function parse(reactMjml, options) {
-  let mjml = reactMjml;
+  let mjml = reactMjml.replace(/ data-reactroot=""/g, '');
 
   templateTags.forEach(tag => {
     const tagRegExp = getTagRegExp(tag);

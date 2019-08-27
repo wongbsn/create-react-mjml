@@ -43,8 +43,11 @@ app.use(express.json());
 app.use(router);
 
 // Transforms mjml data and returns html
-router.post('/mjml', (req, res, next) => {
-  const formattedMjml = format(req.body.mjml);
+router.post('/parse', (req, res, next) => {
+  const formattedMjml = format(req.body.mjml).replace(
+    / data-reactroot=""/g,
+    ''
+  );
   const result = parse(formattedMjml);
 
   if (result.errors.length) {
@@ -79,17 +82,48 @@ router.post('/mjml', (req, res, next) => {
     });
   }
 
-  return res.send(result);
+  return res.send({
+    ...result,
+    mjml: formattedMjml
+  });
 });
 
-router.use('^/$', (req, res, next) =>
+router.use('^/*$', (req, res, next) =>
   res.send(
     `<!DOCTYPE html>
       <html>
         <head>
           <title>Create React MJML</title>
+          <style>
+            html, body, #root {
+              width: 100%;
+              height: 100%;
+              margin: 0;
+            }
+
+            body {
+              overflow: hidden;
+            }
+
+            .app {
+              overflow: scroll;
+            }
+
+            pre {
+              margin: 0 !important;
+              border: none !important;
+              border-radius: 0 !important;
+              min-height: 100%;
+            }
+
+            code {
+              font-size: 14px !important;
+              transform: translateZ(0) !important;
+            }
+          </style>
         </head>
-        <body>
+        <body >
+          <div id="root"></div>
           <script src="app.js"></script>
         </body>
       </html>`
