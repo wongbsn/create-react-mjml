@@ -42,7 +42,7 @@
     "file-loader": "^4.2.0",
     "fs-extra": "^8.1.0",
     "js-beautify": "^1.10.2",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.2",
     "style-loader": "^1.0.0",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7",
