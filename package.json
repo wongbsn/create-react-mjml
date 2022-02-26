@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "he": "^1.2.0",
     "mjml": "^4.4.1",
-    "prismjs": "^1.17.1",
+    "prismjs": "^1.27.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-toastify": "^5.3.2"
